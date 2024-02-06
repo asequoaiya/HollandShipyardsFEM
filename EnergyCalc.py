@@ -1,8 +1,8 @@
 # ----- Import functions -----
 from InputParams import speed_inputs
-from EnergyCoefs import (motion_calc,
-                         ksi_dot_zero, eta_dot_zero, eta_dot_t,
-                         mu_coefficient, collision_type)
+from SpeedCoefficients import eta_dot_zero, ksi_dot_zero
+from CombinedCoefficients import (motion_calc, eta_dot_t,
+                                  mu_coefficient, collision_type)
 
 # ----- Import constants -----
 from InputParams import mu_0, co_restitution

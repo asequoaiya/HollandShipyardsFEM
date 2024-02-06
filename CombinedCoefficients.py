@@ -1,10 +1,9 @@
 # ----- Import libraries -----
 import numpy as np
-from math import sin, cos
 
 # ----- Import functions -----
-from MotionCoefs import (d_ksi_combined, d_eta_combined,
-                         k_ksi_combined, k_eta_combined)
+from BaseCoefficients import (d_ksi_combined, d_eta_combined,
+                              k_ksi_combined, k_eta_combined)
 from InputParams import ksi_eta_inputs
 
 # ----- Import constants ----
@@ -20,34 +19,6 @@ def motion_calc():
     k_eta = k_eta_combined(*ksi_eta_inputs())
 
     return [d_ksi, d_eta, k_ksi, k_eta]
-
-
-def ksi_dot_zero(alpha, beta, v_ax, v_ay, v_b1, v_b2):
-    # Initial velocity in ksi direction
-    velocity = (v_ax * sin(alpha)
-                + v_ay * cos(alpha)
-                + v_b1 * sin(beta - alpha)
-                - v_b2 * cos(beta - alpha))
-
-    return velocity
-
-
-def eta_dot_zero(alpha, beta, v_ax, v_ay, v_b1, v_b2):
-    # Initial velocity in eta direction
-    velocity = (v_ax * cos(alpha)
-                - v_ay * sin(alpha)
-                - v_b1 * cos(beta - alpha)
-                - v_b2 * sin(beta - alpha))
-
-    return velocity
-
-
-def eta_dot_t(d_ksi, d_eta, k_ksi, k_eta, ksi_dot, eta_dot):
-    # Final velocity in eta direction
-    fraction = (k_ksi + mu_0 * k_eta) / (d_ksi + mu_0 * d_eta)
-    velocity = eta_dot - fraction * ksi_dot * (1 - co_restitution)
-
-    return velocity
 
 
 # ----- Collision type -----
@@ -81,3 +52,11 @@ def collision_type(mu, mu_zero):
         return True
     else:
         return False
+
+
+def eta_dot_t(d_ksi, d_eta, k_ksi, k_eta, ksi_dot, eta_dot):
+    # Final velocity in eta direction
+    fraction = (k_ksi + mu_0 * k_eta) / (d_ksi + mu_0 * d_eta)
+    velocity = eta_dot - fraction * ksi_dot * (1 - co_restitution)
+
+    return velocity

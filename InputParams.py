@@ -4,16 +4,16 @@ import math
 
 # ----- Scenario Inputs -----
 # Angles
-alpha = math.radians(90)  # [deg -> rad]
-beta = math.radians(90)  # [deg -> rad]
+alpha = math.radians(120)  # [deg -> rad]
+beta = math.radians(120)  # [deg -> rad]
 
 # Locations
 x_c = 30  # [m]
 y_c = 5.7  # [m]
 
 # Velocities
-v_ax = 1  # [m/s]
-v_ay = 1  # [m/s]
+v_ax = 2  # [m/s]
+v_ay = 0  # [m/s]
 
 v_b1 = 1  # [m/s]
 v_b2 = 1  # [m/s]
@@ -21,7 +21,7 @@ v_b2 = 1  # [m/s]
 # ----- Ship Constants -----
 # Ship geometry
 length_a = 116  # [m]
-x_cog_a = 1  # [m]
+x_cog_a = 5  # [m]
 
 length_b = 116  # [m]
 x_cog_b = 30  # [m]
