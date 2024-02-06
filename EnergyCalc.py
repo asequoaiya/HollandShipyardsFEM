@@ -37,7 +37,6 @@ def total_energy(d_ksi, d_eta, k_ksi, k_eta,
 
     # Sliding collision
     elif not collision:
-        print(d_ksi + mu * d_eta)
         e_ksi = (ksi_dot ** 2 / (d_ksi + mu * d_eta) / 2
                  * (1 - co_restitution ** 2))
         e_eta = (eta_dot ** 2 - eta_t ** 2) / (k_eta + k_ksi / mu) / 2

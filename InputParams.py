@@ -1,47 +1,42 @@
 # Import statements
-import numpy as np
-import math
+from math import radians
 
 # ----- Scenario Inputs -----
 # Angles
-alpha = math.radians(120)  # [deg -> rad]
-beta = math.radians(120)  # [deg -> rad]
+alpha = radians(45)  # [deg -> rad]
+beta = radians(90)  # [deg -> rad]
 
 # Locations
-x_c = 30  # [m]
-y_c = 5.7  # [m]
+x_c = 38.5  # [m]
+y_c = 2.6  # [m]
 
 # Velocities
-v_ax = 2  # [m/s]
+v_ax = 4.5  # [m/s]
 v_ay = 0  # [m/s]
 
-v_b1 = 1  # [m/s]
-v_b2 = 1  # [m/s]
+v_b1 = 4.5  # [m/s]
+v_b2 = 0  # [m/s]
 
 # ----- Ship Constants -----
 # Ship geometry
-length_a = 116  # [m]
-x_cog_a = 5  # [m]
+length_a = 82.5  # [m]
+x_cog_a = 0  # [m]
 
-length_b = 116  # [m]
-x_cog_b = 30  # [m]
-y_cog_b = 20  # [m]
+length_b = 82.5  # [m]
+x_cog_b = 0  # [m]
+y_cog_b = 40  # [m]
 
 r_a = 0.25 * length_a  # [m]
 r_b = 0.25 * length_b  # [m]
 
 # Ship mass
-mass_a = 10340000  # [kg]
-mass_b = 10340000  # [kg]
+mass_a = 4000 * 10 ** 3  # [kg]
+mass_b = 4000 * 10 ** 3  # [kg]
 
 # Added mass
 m_x = 0.05  # [-]
 m_y = 0.85  # [-]
 j_a = 0.21  # [-]
-
-# Block coefficients
-cb_a = 0.7  # [-]
-cb_b = 0.7  # [-]
 
 # ----- Scenario Constants -----
 # Miscellaneous
