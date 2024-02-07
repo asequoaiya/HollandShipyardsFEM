@@ -52,4 +52,4 @@ def impact_angle_scenario(start, end, step_size,
         plt.show()
 
 
-impact_angle_scenario(0, 150, 1, graphing=True)
+impact_angle_scenario(0, 150, 0.01, graphing=False)
