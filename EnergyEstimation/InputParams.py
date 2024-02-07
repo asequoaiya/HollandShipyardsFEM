@@ -1,4 +1,4 @@
-# Import statements
+# ----- Import functions -----
 from math import radians, sin, cos, pi
 
 # ----- Scenario Inputs -----

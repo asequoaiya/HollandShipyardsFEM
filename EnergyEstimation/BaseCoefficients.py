@@ -1,4 +1,4 @@
-# ----- Import libraries -----
+# ----- Import functions -----
 from math import sin, cos
 
 
