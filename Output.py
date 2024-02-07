@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # ----- Import functions -----
-from math import radians, degrees
+from math import radians, degrees, sin, cos, pi
 import InputParams
 import EnergyCalc
 
@@ -32,6 +32,11 @@ def impact_angle_scenario(start, end, step_size,
         # Iterate through beta
         InputParams.beta += radians(step_size)
 
+        # Update CoG of ship B
+        InputParams.x_cog_b = (41.05 + 60.37
+                               * sin(InputParams.beta - 0.5 * pi))  # [m]
+        InputParams.y_cog_b = 60.37 * cos(InputParams.beta - 0.5 * pi)  # [m]
+
     if text_output:
         max_energy_location = list(energy_array).index(max(energy_array))
         print(f"The maximum amount of lost energy is {max(energy_array)} MJ.")
@@ -42,9 +47,9 @@ def impact_angle_scenario(start, end, step_size,
         plt.plot(angle_array, energy_array)
         plt.xlabel("Impact angle beta [deg]")
         plt.ylabel("Energy loss [MJ]")
-        plt.ylim(0, 4.5)
+        # plt.ylim(0, 4.5)
         plt.grid()
         plt.show()
 
 
-impact_angle_scenario(0, 150, 0.1)
+impact_angle_scenario(0, 150, 1, graphing=True)
