@@ -3,35 +3,35 @@ from math import radians
 
 # ----- Scenario Inputs -----
 # Angles
-alpha = radians(45)  # [deg -> rad]
+alpha = radians(0)  # [deg -> rad]
 beta = radians(90)  # [deg -> rad]
 
 # Locations
-x_c = 38.5  # [m]
-y_c = 2.6  # [m]
+x_c = 41.05  # [m]
+y_c = 5.7  # [m]
 
 # Velocities
-v_ax = 4.5  # [m/s]
+v_ax = 6 / 3.6  # [m/s]
 v_ay = 0  # [m/s]
 
-v_b1 = 4.5  # [m/s]
+v_b1 = 6 / 3.6  # [m/s]
 v_b2 = 0  # [m/s]
 
 # ----- Ship Constants -----
 # Ship geometry
-length_a = 82.5  # [m]
+length_a = 109.975  # [m]
 x_cog_a = 0  # [m]
 
-length_b = 82.5  # [m]
-x_cog_b = 0  # [m]
-y_cog_b = 40  # [m]
+length_b = 109.975  # [m]
+x_cog_b = 41.05  # [m]
+y_cog_b = 60.37  # [m]
 
 r_a = 0.25 * length_a  # [m]
 r_b = 0.25 * length_b  # [m]
 
 # Ship mass
-mass_a = 4000 * 10 ** 3  # [kg]
-mass_b = 4000 * 10 ** 3  # [kg]
+mass_a = 3891.96 * 10 ** 3  # [kg]
+mass_b = 3891.96 * 10 ** 3  # [kg]
 
 # Added mass
 m_x = 0.05  # [-]
