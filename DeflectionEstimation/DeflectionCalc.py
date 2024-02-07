@@ -27,7 +27,7 @@ def plate_deflection(a_1, a_2, b_1, b_2, flow_stress, thickness, area, mu, phi):
     b = b_1 + b_2
     min_length = min(a, b)
 
-    d_crit = min_length * (2 * 0.05) ** 0.5
+    d_crit = 0.5
 
     # Integration factor
     constant_factor = 2 / (3 ** 1.5) * flow_stress * thickness * area * sin(phi)
@@ -39,8 +39,12 @@ def plate_deflection(a_1, a_2, b_1, b_2, flow_stress, thickness, area, mu, phi):
                                      args=(b_1, b_2))
 
     # Absorbed energy
-    absorbed_energy = (constant_factor
-                       * (convoluted_integral[0] + simple_integral[0]))
+    base_energy = (constant_factor
+                   * (convoluted_integral[0] + simple_integral[0]))
+    perpendicular_energy = base_energy * sin(phi)
+    parallel_energy = base_energy * mu * cos(phi)
+
+    absorbed_energy = perpendicular_energy + parallel_energy
 
     return absorbed_energy
 
