@@ -4,7 +4,7 @@ from math import radians
 # ----- Scenario Inputs -----
 # Angles
 alpha = radians(0)  # [deg -> rad]
-beta = radians(90)  # [deg -> rad]
+beta = radians(15)  # [deg -> rad]
 
 # Locations
 x_c = 41.05  # [m]

@@ -42,6 +42,3 @@ def total_energy(d_ksi, d_eta, k_ksi, k_eta,
         e_eta = (eta_dot ** 2 - eta_t ** 2) / (k_eta + k_ksi / mu) / 2
 
         return e_ksi + e_eta
-
-
-print(total_energy(*energy_input()))
