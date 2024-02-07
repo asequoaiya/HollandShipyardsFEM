@@ -1,7 +1,7 @@
-# ----- Import libraries -----
-import numpy as np
+# ----- Import functions -----
 from math import sin, cos, log
 from mpmath import sec
+from InputParams import energy_input
 
 
 # ----- Plate deflection -----
@@ -16,6 +16,9 @@ def plate_deflection(a_1, a_2, b_1, b_2, flow_stress, thickness, area, mu, phi):
     min_length = min(a, b)
 
     d_crit = min_length * (2 * 0.05) ** 0.5
+
+    print(d_crit * cos(phi) - a_2)
+    print(cos(phi))
 
     # Absorbed energy (Analytical formulation)
     constant_factor = 2 / (3 ** 1.5) * flow_stress * thickness * area
@@ -35,5 +38,7 @@ def plate_deflection(a_1, a_2, b_1, b_2, flow_stress, thickness, area, mu, phi):
 
     absorbed_energy = e_term_one + e_term_two + e_term_three
 
+    return absorbed_energy
 
 
+print(plate_deflection(*energy_input()))
