@@ -5,7 +5,7 @@ from math import radians, sin, cos, pi
 # Angles
 alpha = radians(0)  # [deg -> rad]
 beta = radians(15)  # [deg -> rad]
-print(beta)
+
 # Locations
 x_c = 41.05  # [m]
 y_c = 5.7  # [m]

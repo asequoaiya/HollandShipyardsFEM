@@ -47,7 +47,7 @@ def impact_angle_scenario(start, end, step_size,
         plt.plot(angle_array, energy_array)
         plt.xlabel("Impact angle beta [deg]")
         plt.ylabel("Energy loss [MJ]")
-        # plt.ylim(0, 4.5)
+        plt.ylim(0, 12)
         plt.grid()
         plt.show()
 
