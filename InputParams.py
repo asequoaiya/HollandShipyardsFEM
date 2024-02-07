@@ -1,11 +1,11 @@
 # Import statements
-from math import radians
+from math import radians, sin, cos, pi
 
 # ----- Scenario Inputs -----
 # Angles
 alpha = radians(0)  # [deg -> rad]
 beta = radians(15)  # [deg -> rad]
-
+print(beta)
 # Locations
 x_c = 41.05  # [m]
 y_c = 5.7  # [m]
@@ -23,8 +23,8 @@ length_a = 109.975  # [m]
 x_cog_a = 0  # [m]
 
 length_b = 109.975  # [m]
-x_cog_b = 41.05  # [m]
-y_cog_b = 60.37  # [m]
+x_cog_b = 41.05 + 60.37 * sin(beta - 0.5 * pi)  # [m]
+y_cog_b = 60.37 * cos(beta - 0.5 * pi)  # [m]
 
 r_a = 0.25 * length_a  # [m]
 r_b = 0.25 * length_b  # [m]
