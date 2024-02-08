@@ -3,7 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # ----- Import functions -----
-from math import radians, degrees, sin, cos, pi
 import InputParams
 from DeflectionCalc import plate_deflection_energy
 
@@ -40,4 +39,4 @@ def deflection_scenario(start, end, step_size, graphing=True):
         plt.show()
 
 
-deflection_scenario(0, 0.40, 0.01)
+deflection_scenario(0, 0.40, 0.01, graphing=True)

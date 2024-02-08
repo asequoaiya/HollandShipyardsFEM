@@ -29,7 +29,7 @@ a_2 = length * (100 - hit_location[0]) / 100  # [m]
 b_1 = width * hit_location[1] / 100  # [m]
 b_2 = width * (100 - hit_location[1]) / 100  # [m]
 
-phi = radians(35)  # [deg -> rad]
+phi = radians(45)  # [deg -> rad]
 
 deflection = 0.1  # [m]
 
