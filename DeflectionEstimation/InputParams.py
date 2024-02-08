@@ -3,8 +3,8 @@ from math import radians
 
 # ----- Geometry constants -----
 # --- Plate ---
-length = 0.8  # [m]
-width = 0.6  # [m]
+length = 2.4  # [m]
+width = 2.8  # [m]
 thickness = 0.01  # [m]
 
 area = length * width  # [m2]
@@ -26,20 +26,23 @@ hit_location = [50, 50]  # % of length
 a_1 = length * hit_location[0] / 100  # [m]
 a_2 = length * (100 - hit_location[0]) / 100  # [m]
 
-b_1 = length * hit_location[1] / 100  # [m]
-b_2 = length * (100 - hit_location[1]) / 100  # [m]
+b_1 = width * hit_location[1] / 100  # [m]
+b_2 = width * (100 - hit_location[1]) / 100  # [m]
 
-phi = radians(96.36)  # [deg -> rad]
+phi = radians(35)  # [deg -> rad]
+
+deflection = 0.1  # [m]
 
 # ----- Other constants -----
-flow_stress = 297.5 * 10 ** 6  # [Pa]
+flow_stress = 300 * 10 ** 6  # [Pa]
 friction_coefficient = 0.3  # [-]
 
 
 # ----- Input function -----
 def energy_input():
     input_list = [a_1, a_2, b_1, b_2,
-                  flow_stress, thickness, area, friction_coefficient, phi]
+                  flow_stress, thickness, area,
+                  friction_coefficient, phi, deflection]
 
     return input_list
 

@@ -18,6 +18,7 @@ def deflection_scenario(start, end, step_size, graphing=True):
     energy_array = np.zeros(int((end - start) / step_size) + 1)
     deflection_array = (np.arange(start, end + step_size, step_size)
                         + InputParams.deflection)
+    # print(deflection_array)
 
     # Set of deflections (0.1-0.5 meters)
     for n in range(len(energy_array)):
@@ -39,4 +40,4 @@ def deflection_scenario(start, end, step_size, graphing=True):
         plt.show()
 
 
-deflection_scenario(0, 0.4, 0.01)
+deflection_scenario(0, 0.40, 0.01)
