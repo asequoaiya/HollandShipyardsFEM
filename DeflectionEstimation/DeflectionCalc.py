@@ -82,7 +82,6 @@ def plate_deflection_force(a_1, a_2, b_1, b_2, flow_stress, thickness, area,
 
     # Multiplication factor
     constant_factor = 2 / (3 ** 1.5) * flow_stress * thickness * area * sin(phi)
-    print(constant_factor)
 
     # Evaluation
     convoluted_component = convoluted_function(deflection, a_1, a_2, phi)
