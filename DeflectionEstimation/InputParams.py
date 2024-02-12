@@ -3,8 +3,8 @@ from math import radians
 
 # ----- Geometry constants -----
 # --- Plate ---
-length = 2.4  # [m]
-width = 2.8  # [m]
+length = 0.8  # [m]
+width = 0.6  # [m]
 thickness = 0.01  # [m]
 
 area = length * width  # [m2]
@@ -29,7 +29,7 @@ a_2 = length * (100 - hit_location[0]) / 100  # [m]
 b_1 = width * hit_location[1] / 100  # [m]
 b_2 = width * (100 - hit_location[1]) / 100  # [m]
 
-phi = radians(45)  # [deg -> rad]
+phi = radians(90)  # [deg -> rad]
 
 deflection = 0.1  # [m]
 
