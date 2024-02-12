@@ -4,8 +4,8 @@ from numpy import tan
 from numpy import radians as rad
 
 
-def plate_cutting_deflection(flow_stress, ductility, mu,
-                             thickness, length, theta):
+def plate_cutting_energy(flow_stress, ductility, mu,
+                         thickness, length, theta):
     """
     Energy calculation for the cutting of a plate.
     """
@@ -17,7 +17,3 @@ def plate_cutting_deflection(flow_stress, ductility, mu,
     energy_loss = material_term * geometry_term * friction_term
 
     return energy_loss
-
-
-print(plate_cutting_deflection(300_000_000, 0.1, 0.6, 0.01, 0.485, 45))
-

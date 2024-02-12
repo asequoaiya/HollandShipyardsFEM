@@ -34,8 +34,8 @@ def simple_function(x, b_1, b_2):
     return x / (b_1 * b_2)
 
 
-def plate_deflection_energy(a_1, a_2, b_1, b_2, flow_stress, thickness, area,
-                            mu, phi, deflection):
+def plate_deflection_energy(a_1, a_2, b_1, b_2, flow_stress, thickness, mu,
+                            phi, deflection):
     """
     Calculates the amount of deflection in a plate and its associated energy.
     """
@@ -46,6 +46,8 @@ def plate_deflection_energy(a_1, a_2, b_1, b_2, flow_stress, thickness, area,
     min_length = min(a, b)
 
     d_crit = deflection
+
+    area = a * b
 
     # Integration factor
     constant_factor = 2 / (3 ** 1.5) * flow_stress * thickness * area * sin(phi)
