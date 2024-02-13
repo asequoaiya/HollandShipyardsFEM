@@ -43,9 +43,6 @@ def plate_deflection_energy(a_1, a_2, b_1, b_2, flow_stress, thickness, mu,
     # Critical deflection
     a = a_1 + a_2
     b = b_1 + b_2
-    min_length = min(a, b)
-
-    d_crit = deflection
 
     area = a * b
 
@@ -78,9 +75,8 @@ def plate_deflection_force(a_1, a_2, b_1, b_2, flow_stress, thickness, area,
     # Critical deflection
     a = a_1 + a_2
     b = b_1 + b_2
-    min_length = min(a, b)
 
-    d_crit = deflection
+    area = a * b
 
     # Multiplication factor
     constant_factor = 2 / (3 ** 1.5) * flow_stress * thickness * area * sin(phi)
