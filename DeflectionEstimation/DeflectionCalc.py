@@ -66,7 +66,7 @@ def plate_deflection_energy(a_1, a_2, b_1, b_2, flow_stress, thickness, mu,
     return absorbed_energy
 
 
-def plate_deflection_force(a_1, a_2, b_1, b_2, flow_stress, thickness, area,
+def plate_deflection_force(a_1, a_2, b_1, b_2, flow_stress, thickness,
                            mu, phi, deflection):
     """
     Calculates the amount of deflection in a plate and its associated force.
