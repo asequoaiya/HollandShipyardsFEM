@@ -1,3 +1,13 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+
+/DeflectionEstimation/Test.py
+/DeflectionEstimation/NumericalOutput.py
+
+/EnergyEstimation/Test.py
+/EnergyEstimation/Test2.py
+/EnergyEstimation/Output.py
+
+/LSDynaVerification/Test.py
+/LSDynaVerification/VerificationPrinter.py
