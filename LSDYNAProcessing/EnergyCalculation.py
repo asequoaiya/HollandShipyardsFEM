@@ -3,6 +3,7 @@ import pandas as pd
 from scipy import integrate
 import os
 import shutil
+import numpy as np
 
 # ----- Import functions -----
 from rcforc.rcforcCSVPreprocessing import rcforc_preprocessing
@@ -95,7 +96,7 @@ def single_contact_energy(data_path: str, rcforc_number: int):
 
     energy = abs(x_energy + y_energy + z_energy)
 
-    return energy
+    return energy, x_energy, y_energy, z_energy
 
 
 def energy_integrator(dataset: pd.DataFrame, direction: str):
@@ -128,10 +129,22 @@ def all_contact_energy(dyna_directory_path):
 
     # Set initial energy to zero
     energy = 0
+    energy_array = np.zeros((10, 3))
 
     # Loop through all contact numbers
     for n in range(10):
+        # Calculate energy for all contact numbers
         contact_number = n + 1
-        energy += single_contact_energy(data_path, contact_number)
+        contact_energy, x_energy, y_energy, z_energy \
+            = single_contact_energy(data_path, contact_number)
+
+        # Store data
+        energy += contact_energy
+        energy_array[n] = x_energy, y_energy, z_energy
+
+    # Save energy array as explicit file
+    energy_dataset = pd.DataFrame(energy_array)
+    energy_path = os.path.join(data_path, 'energy.csv')
+    energy_dataset.to_csv(energy_path, sep=',')
 
     print(energy)
