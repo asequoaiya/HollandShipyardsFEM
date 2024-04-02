@@ -2,7 +2,7 @@
 import csv
 
 # ----- Import function -----
-from FileSupportFunctions import path_writer
+from FileSupportFunctions import path_writer, csv_writer_with_headers
 
 
 def rcforc_text_cleaner(input_path: str):
@@ -32,31 +32,11 @@ def rcforc_txt_to_csv(input_path: str):
     :return: The output path of the .csv file
     """
 
-    # Create a new path for the output file
-    output_path = path_writer(input_path, 'rcforc_clean.csv')
+    header = ['Part type', 'Contact number', 'Time string', 'Time', 'Fx string',
+              'Fx',	'Fy string', 'Fy', 'Fz string', 'Fz', 'Mass string', 'Mass',
+              'Mx string', 'Mx', 'MY string', 'My', 'Mz string', 'Mz']
 
-    # Open the input file
-    with open(input_path, 'r') as in_file:
-        # Remove/strip any leading/trailing whitespaces
-        stripped = (line.strip() for line in in_file)
-
-        # Split each line with any amount of white spaces
-        lines = (line.split() for line in stripped if line)
-
-        # Open the output file path
-        with open(output_path, 'w', newline='') as out_file:
-            # Establish writer object
-            writer = csv.writer(out_file)
-
-            # Write a row with column titles
-            writer.writerow(('Part type', 'Contact number',
-                             'Time string', 'Time',
-                             'Fx string', 'Fx',	'Fy string', 'Fy',
-                             'Fz string', 'Fz', 'Mass string', 'Mass',
-                             'Mx string', 'Mx', 'MY string', 'My',
-                             'Mz string', 'Mz'))
-
-            # Then write all the cleaned and stripped lines
-            writer.writerows(lines)
+    output_path = csv_writer_with_headers(input_path, 'rcforc_clean.csv',
+                                          header, output_path_req=True)
 
     return output_path
