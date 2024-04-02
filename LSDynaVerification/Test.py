@@ -4,5 +4,6 @@ for i, value in enumerate(my_list):
     if value:
         print(i)
 
+a = 0
 
 

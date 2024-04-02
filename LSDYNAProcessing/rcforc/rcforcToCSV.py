@@ -1,6 +1,3 @@
-# ----- Import libraries -----
-import csv
-
 # ----- Import function -----
 from LSDYNAProcessing.FileSupportFunctions import csv_writer_with_headers
 

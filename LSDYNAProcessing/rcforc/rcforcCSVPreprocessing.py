@@ -35,7 +35,8 @@ def rcforc_csv_cleaner(csv_path: str):
     return rcforc_df
 
 
-def rcforc_dataset_splitter(raw_input_path, input_dataset: pd.DataFrame, contact_number: int, ):
+def rcforc_dataset_splitter(raw_input_path, input_dataset: pd.DataFrame,
+                            contact_number: int):
     """
     Splits the rcforc dataset into each of the contact numbers,
     and saves it as an .csv file.

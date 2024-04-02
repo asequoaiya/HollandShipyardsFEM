@@ -2,7 +2,9 @@
 import pandas as pd
 
 # ----- Import functions -----
-from LSDYNAProcessing.rbdout.rbdoutToCSV import rbd_text_cleaner, time_txt_to_csv, coord_txt_to_csv
+from LSDYNAProcessing.rbdout.rbdoutToCSV import (rbd_text_cleaner,
+                                                 time_txt_to_csv,
+                                                 coord_txt_to_csv)
 from LSDYNAProcessing.FileSupportFunctions import path_writer
 
 
@@ -46,4 +48,3 @@ def rbdout_preprocessing(raw_input_path):
 
     # Combine two .csv files into one .csv file
     rbdout_combiner(time_csv_path, coord_csv_path)
-
