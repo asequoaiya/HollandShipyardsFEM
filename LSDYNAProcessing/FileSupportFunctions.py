@@ -18,12 +18,14 @@ def path_writer(input_path: str, output_name: str):
     return output_path
 
 
-def csv_writer_with_headers(input_path: str, output_name: str, header: list):
+def csv_writer_with_headers(input_path: str, output_name: str, header: list,
+                            output_path_req=False):
     """
     Converts a .txt file into a readable .csv file
     :param input_path: the path of the .txt file
     :param output_name: the name of the output .csv file
     :param header: the headers for the new .csv file
+    :param output_path_req: returns the output path if required
     """
 
     # Opening input file in reading mode
@@ -47,6 +49,9 @@ def csv_writer_with_headers(input_path: str, output_name: str, header: list):
 
             # Then write all the cleaned and stripped lines
             writer.writerows(clean_lines)
+
+        if output_path_req:
+            return output_path
 
 
 csv_writer_with_headers(r'C:\Users\kevin\OneDrive\Documents\HollandShipyards'
