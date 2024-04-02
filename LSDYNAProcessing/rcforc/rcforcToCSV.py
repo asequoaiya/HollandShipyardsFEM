@@ -2,7 +2,7 @@
 import csv
 
 # ----- Import function -----
-from FileSupportFunctions import path_writer, csv_writer_with_headers
+from LSDYNAProcessing.FileSupportFunctions import csv_writer_with_headers
 
 
 def rcforc_text_cleaner(input_path: str):
@@ -14,11 +14,11 @@ def rcforc_text_cleaner(input_path: str):
     # Open file in reading mode
     with open(input_path, 'r') as reading_file:
         # Read lines in the file
-        lines_after_17 = reading_file.readlines()[18:]
+        lines_after_18 = reading_file.readlines()[18:]
 
         # Opening file in writing mode
         with open(input_path, 'w') as writing_file:
-            for line in lines_after_17:
+            for line in lines_after_18:
                 # Check if line contains nonsensical data
                 if line.find('undefined') == -1:
                     writing_file.write(line)

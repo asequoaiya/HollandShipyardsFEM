@@ -1,9 +1,10 @@
 # ----- Import library -----
 import pandas as pd
 
-
 # ----- Import functions -----
-from rcforcToCSV import rcforc_text_cleaner, rcforc_txt_to_csv
+from LSDYNAProcessing.rcforc.rcforcToCSV import (rcforc_text_cleaner,
+                                                 rcforc_txt_to_csv)
+from LSDYNAProcessing.FileSupportFunctions import path_writer
 
 
 def rcforc_csv_cleaner(csv_path: str):
@@ -19,16 +20,12 @@ def rcforc_csv_cleaner(csv_path: str):
     # Remove all NaN or non-existent numbers (happens for contact number 11)
     rcforc_df = rcforc_df[rcforc_df['Mz'].notna()]
 
-    print(rcforc_df)
-
     # Drops all 'title string' columns
     rcforc_df.drop(['Time string', 'Fx string', 'Fy string', 'Fz string',
-                    'Mass string', 'Mx string',  'MY string', 'Mz string'],
+                    'Mass string', 'Mx string', 'MY string', 'Mz string'],
                    axis=1, inplace=True)
 
-    print(rcforc_df)
-
-    # Select only "master" part type
+    # Select only 'slave' part type
     rcforc_df = rcforc_df.loc[rcforc_df['Part type'] == "slave"]
 
     # Map contact number to int
@@ -38,10 +35,11 @@ def rcforc_csv_cleaner(csv_path: str):
     return rcforc_df
 
 
-def rcforc_dataset_splitter(input_dataset: pd.DataFrame, contact_number: int):
+def rcforc_dataset_splitter(raw_input_path, input_dataset: pd.DataFrame, contact_number: int, ):
     """
     Splits the rcforc dataset into each of the contact numbers,
     and saves it as an .csv file.
+    :param raw_input_path: the path of the raw input file
     :param input_dataset: Appropriate dataset with a contact number row
     :param contact_number: The selected contact number
     """
@@ -59,11 +57,14 @@ def rcforc_dataset_splitter(input_dataset: pd.DataFrame, contact_number: int):
     split_dataset = input_dataset.loc[input_dataset['Contact number']
                                       == contact_number]
 
+    # Write a path for the .csv file
+    output_path = path_writer(raw_input_path, f"rcforc_{contact_number}.csv")
+
     # Save dataset as a csv file
-    split_dataset.to_csv(f"rcforc_{contact_number}.csv", sep=',')
+    split_dataset.to_csv(output_path, sep=',')
 
 
-def preprocessing(raw_input_path: str):
+def rcforc_preprocessing(raw_input_path: str):
     """
     Transforms the raw text file into 10 different .csv files.
     :param raw_input_path: The path of the raw text file
@@ -81,4 +82,5 @@ def preprocessing(raw_input_path: str):
     # Loop through all contact numbers (1-10)
     for n in range(10):
         current_number = int(n + 1)
-        rcforc_dataset_splitter(clean_dataset, contact_number=current_number)
+        rcforc_dataset_splitter(raw_input_path, clean_dataset,
+                                contact_number=current_number)
