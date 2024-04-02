@@ -1,9 +1,11 @@
 # ----- Import libraries -----
 import csv
-import os
+
+# ----- Import function -----
+from FileSupportFunctions import path_writer
 
 
-def rcforc_text_cleaner(input_path):
+def rcforc_text_cleaner(input_path: str):
     """
     Cleans the raw file from the header and undefined lines.
     :param input_path: Path of the raw input file
@@ -22,7 +24,7 @@ def rcforc_text_cleaner(input_path):
                     writing_file.write(line)
 
 
-def rcforc_txt_to_csv(input_path):
+def rcforc_txt_to_csv(input_path: str):
     """
     Reads in the cleaned text file, and writes it to the appropriate .csv
     format.
@@ -30,11 +32,8 @@ def rcforc_txt_to_csv(input_path):
     :return: The output path of the .csv file
     """
 
-    # Select the directory that the input is in
-    module_path = os.path.dirname(os.path.realpath(input_path))
-
-    # Create a new output file path
-    output_path = os.path.join(module_path, 'rcforc_clean.csv')
+    # Create a new path for the output file
+    output_path = path_writer(input_path, 'rcforc_clean.csv')
 
     # Open the input file
     with open(input_path, 'r') as in_file:

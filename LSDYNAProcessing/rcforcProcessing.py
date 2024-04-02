@@ -1,6 +1,8 @@
-# ----- Import functions -----
+# ----- Import libraries -----
 import pandas as pd
+from scipy import integrate
 
+# ----- Import function -----
 from rcforcCSVPreprocessing import preprocessing
 
 
@@ -10,6 +12,8 @@ def energy_integrator(dataset):
     :param dataset:
     :return:
     """
+
+
 def total_energy():
 
     energy = 0

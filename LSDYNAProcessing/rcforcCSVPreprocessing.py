@@ -6,7 +6,7 @@ import pandas as pd
 from rcforcToCSV import rcforc_text_cleaner, rcforc_txt_to_csv
 
 
-def rcforc_csv_cleaner(csv_path):
+def rcforc_csv_cleaner(csv_path: str):
     """
     Imports and cleans the rcforc dataset, for use in the splitter.
     :param csv_path: The path to the input .csv file
@@ -38,7 +38,7 @@ def rcforc_csv_cleaner(csv_path):
     return rcforc_df
 
 
-def rcforc_dataset_splitter(input_dataset, contact_number):
+def rcforc_dataset_splitter(input_dataset: pd.DataFrame, contact_number: int):
     """
     Splits the rcforc dataset into each of the contact numbers,
     and saves it as an .csv file.
@@ -63,7 +63,7 @@ def rcforc_dataset_splitter(input_dataset, contact_number):
     split_dataset.to_csv(f"rcforc_{contact_number}.csv", sep=',')
 
 
-def preprocessing(raw_input_path):
+def preprocessing(raw_input_path: str):
     """
     Transforms the raw text file into 10 different .csv files.
     :param raw_input_path: The path of the raw text file
