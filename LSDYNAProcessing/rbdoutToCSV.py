@@ -1,7 +1,9 @@
 # ----- Import libraries -----
 import csv
-import os
 import numpy as np
+
+# ----- Import function -----
+from FileSupportFunctions import path_writer, csv_writer_with_headers
 
 
 def rbd_text_cleaner(input_path: str, time_output: str, coord_output: str):
@@ -22,9 +24,8 @@ def rbd_text_cleaner(input_path: str, time_output: str, coord_output: str):
         coordinate_lines = 4 + np.arange(201) * 22
 
         # Create a new path for the output file
-        module_path = os.path.dirname(os.path.realpath(input_path))
-        time_output_path = os.path.join(module_path, time_output)
-        coord_output_path = os.path.join(module_path, coord_output)
+        time_output_path = path_writer(input_path, time_output)
+        coord_output_path = path_writer(input_path, coord_output)
 
         # Opening time output file in writing mode
         with open(time_output_path, 'w') as writing_file:
@@ -38,11 +39,25 @@ def rbd_text_cleaner(input_path: str, time_output: str, coord_output: str):
         with open(coord_output_path, 'w') as writing_file:
             # Loop through that need to be written
             for index in coordinate_lines:
-                coord_line = useful_lines[index]
+                coord_line = useful_lines[index][3:]
                 writing_file.write(coord_line)
 
 
-rbd_text_cleaner(r'C:\Users\kevin\OneDrive\Documents\HollandShipyards'
-                 r'\DNV RP C208\LS-DYNA Files\Full Ship'
-                 r'\MillimeterModel\WiderMMModel\BoxImpact\kek',
-                 'time.txt', 'coord.txt')
+def time_txt_to_csv(time_path: str):
+    """
+    Turns the time.txt file into readable .csv file
+    :param time_path: the file path for time.txt
+    """
+
+    csv_writer_with_headers(time_path, 'time.csv',
+                            ['Time string', 'Time'])
+
+
+def coord_txt_to_csv(coord_path: str):
+    """
+    Turns the coord.txt file into readable .csv file
+    :param coord_path: the file path for coord.txt
+    """
+
+    csv_writer_with_headers(coord_path, 'coord.csv',
+                            ['Coord string', 'X', 'Y', 'Z'])
