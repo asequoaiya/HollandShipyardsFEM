@@ -52,9 +52,3 @@ def csv_writer_with_headers(input_path: str, output_name: str, header: list,
 
         if output_path_req:
             return output_path
-
-
-csv_writer_with_headers(r'C:\Users\kevin\OneDrive\Documents\HollandShipyards'
-                        r'\DNV RP C208\LS-DYNA Files\Full Ship\MillimeterModel'
-                        r'\WiderMMModel\BoxImpact\time.txt',
-                        'sussy.csv', ['amogus', 'balls'])
