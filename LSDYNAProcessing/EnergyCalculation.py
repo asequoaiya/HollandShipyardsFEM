@@ -127,8 +127,7 @@ def all_contact_energy(dyna_directory_path):
     # Process raw data files into usable .csv files
     data_path = dataset_processor(dyna_directory_path)
 
-    # Set initial energy to zero
-    energy = 0
+    # Set up empty array to store values
     energy_array = np.zeros((10, 3))
 
     # Loop through all contact numbers
@@ -138,13 +137,13 @@ def all_contact_energy(dyna_directory_path):
         contact_energy, x_energy, y_energy, z_energy \
             = single_contact_energy(data_path, contact_number)
 
-        # Store data
-        energy += contact_energy
         energy_array[n] = x_energy, y_energy, z_energy
+
+    # Create path for the energy calculation
+    energy_path = os.path.join(data_path, 'energy.csv')
 
     # Save energy array as explicit file
     energy_dataset = pd.DataFrame(energy_array)
-    energy_path = os.path.join(data_path, 'energy.csv')
-    energy_dataset.to_csv(energy_path, sep=',')
+    energy_headers = ['X energy', 'Y energy', 'Z energy']
 
-    print(energy)
+    energy_dataset.to_csv(energy_path, sep=',', header=energy_headers)
