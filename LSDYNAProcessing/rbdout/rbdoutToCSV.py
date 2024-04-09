@@ -1,5 +1,6 @@
 # ----- Import libraries -----
 import numpy as np
+import math
 
 # ----- Import function -----
 from LSDYNAProcessing.FileSupportFunctions import (path_writer,
@@ -17,9 +18,12 @@ def rbd_text_cleaner(input_path: str):
         # Read lines in the file
         useful_lines = reading_file.readlines()[4:]
 
+        # Calculate amount of time steps
+        no_of_time_steps = math.ceil(len(useful_lines) / 22)
+
         # Lines that need to be written
-        time_lines = np.arange(201) * 22
-        coordinate_lines = 4 + np.arange(201) * 22
+        time_lines = np.arange(no_of_time_steps) * 22
+        coordinate_lines = 4 + np.arange(no_of_time_steps) * 22
 
         # Create a new path for the output file
         time_output_path = path_writer(input_path, 'time.txt')
