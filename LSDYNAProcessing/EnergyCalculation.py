@@ -121,7 +121,7 @@ def all_contact_energy(dyna_directory_path):
     Calculates the total amount of energy lost in the simulation.
     Fully processes all files, from raw to usable .csv.
     :param dyna_directory_path: path of the LS-DYNA output directory
-    :return: the total amount of energy lost
+    :return: parameter to let program know the files have been processed
     """
 
     # Process raw data files into usable .csv files
@@ -147,3 +147,5 @@ def all_contact_energy(dyna_directory_path):
     energy_headers = ['X energy', 'Y energy', 'Z energy']
 
     energy_dataset.to_csv(energy_path, sep=',', header=energy_headers)
+
+    return "done"
