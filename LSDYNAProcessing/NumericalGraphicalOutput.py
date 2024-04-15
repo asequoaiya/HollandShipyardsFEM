@@ -1,5 +1,4 @@
 # ----- Import libraries ----
-import matplotlib.pyplot as plt
 import pandas as pd
 import os
 import numpy as np
@@ -31,18 +30,25 @@ def contact_energy_loss(contact_number: int, directory_path: str):
     # If 1 through 10
     elif 1 <= contact_number <= 10:
         # Then only the given contact number is taken into account
-        total_loss = sum(abs(energy_loss_array)[contact_number + 1])
+        total_loss = sum(abs(energy_loss_array)[contact_number])
 
         return total_loss
 
 
 def get_force_array(file_number: int, directory_path: str,
                     direction_number: int):
-
-    force_array = []
+    """
+    Returns the force in a given direction of a given simulation run.
+    :param file_number: number of the file, corresponds to a contact number
+    :param directory_path: path of the ProcessedData directory
+    :param direction_number: the direction of the required force
+    :return: array of the force in the given direction
+    """
 
     combined_path = os.path.join(directory_path,
                                  f'combined_{file_number}.csv')
+
+    force_array = []
 
     # Read combined.csv as array
     combined_force_array = np.array(pd.read_csv(fr"{combined_path}",
@@ -54,6 +60,11 @@ def get_force_array(file_number: int, directory_path: str,
 
 
 def get_coord(directory_path: str):
+    """
+    Returns the coordinate array of a given simulation run.
+    :param directory_path: path of the ProcessedData directory
+    :return: array of coordinates in X, Y, and Z
+    """
     coord_path = os.path.join(directory_path, 'coord.csv')
 
     coord_array = np.array(pd.read_csv(fr"{coord_path}", usecols=[1, 2, 3]))
@@ -71,53 +82,33 @@ def contact_force_graph(contact_number: int, directory_path: str,
     """
 
     # Map direction to index
-    direction_dict = {'x': 0, 'y': 1, 'z': 2}
+    direction_dict = {'X': 0, 'Y': 1, 'Z': 2}
     dir_no = direction_dict[f'{direction}']
 
     if contact_number == 0:
-        x_force_array, y_force_array, z_force_array = [], [], []
+        force_array = []
 
         # Then all contacts are taken into account
         for n in range(10):
-            x_force_array.append(get_force_array(n + 1, directory_path, dir_no))
-            y_force_array.append(get_force_array(n + 1, directory_path, dir_no))
-            z_force_array.append(get_force_array(n + 1, directory_path, dir_no))
+            force_array.append(get_force_array(n + 1, directory_path, dir_no))
 
-        x_force_array = np.sum(np.array(x_force_array), axis=0)[0]
-        y_force_array = np.sum(np.array(y_force_array), axis=0)[0]
-        z_force_array = np.sum(np.array(z_force_array), axis=0)[0]
+        force_array = np.sum(np.array(force_array), axis=0)[0]
 
         coord_array = get_coord(directory_path)
 
-        fig, (ax1, ax2, ax3) = plt.subplots(3)
-        fig.suptitle('Force over location')
-
-        ax1.plot(coord_array[:, 0], x_force_array)
-        ax2.plot(coord_array[:, 1], y_force_array)
-        ax3.plot(coord_array[:, 2], z_force_array)
-
-        plt.show()
-
-
+        return coord_array[:, dir_no], force_array
 
     # If 1 through 10
     elif 1 <= contact_number <= 10:
         combined_path = os.path.join(directory_path,
-                                     f'combined_{contact_number + 1}.csv')
+                                     f'combined_{contact_number}.csv')
 
         # Read combined.csv as array
-        combined_force_array = np.array(pd.read_csv(fr"{combined_path}",
-                                                    usecols=[5, 6, 7]))
+        force_array = np.array(pd.read_csv(fr"{combined_path}",
+                                           usecols=[5, 6, 7]))
 
-        x_force_array = list(combined_force_array[:, 0])
-        y_force_array = list(combined_force_array[:, 1])
-        z_force_array = list(combined_force_array[:, 2])
+        force_array = force_array[:, dir_no]
 
+        coord_array = get_coord(directory_path)
 
-contact_force_graph(0,
-                    r"C:\HollandShipyards\LS-DYNA\LSDNARunningEnvironment"
-                    r"\2.5mramtest_ELFORM1_directionvectored\ProcessedData",
-                    'x')
-
-
-
+        return coord_array[:, dir_no], force_array
