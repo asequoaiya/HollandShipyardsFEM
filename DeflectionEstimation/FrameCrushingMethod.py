@@ -33,6 +33,25 @@ def pre_rupture_energy(thickness, b_1, b_2, flow_stress):
     return energy_loss
 
 
+def concertina_energy(thickness, b_1, b_2, flow_stress, deflection, fold_height):
+    """
+    Determines the amount of energy loss due to concertina tearing.
+    Note: simplification by assuming b_1 = b_2 = b.
+          Further simplification by assuming energy = force * distance as the
+          concertina force is a MEAN force.
+    """
+    half_width = (b_1 + b_2) / 2
+
+    powered_term = thickness ** (5 / 3) * half_width ** (1 / 3)
+    mean_force = 6.77 * flow_stress * powered_term
+
+    tearing_distance = max(deflection - 3 * fold_height, 0)
+
+    energy_loss = mean_force * tearing_distance
+
+    return energy_loss
+
+
 def frame_crushing_energy(thickness, b_1, b_2, flow_stress, deflection):
     """
     Determines the amount of energy required to crush a frame to a given
@@ -45,16 +64,30 @@ def frame_crushing_energy(thickness, b_1, b_2, flow_stress, deflection):
 
     energy_losses = 0
 
-    if 0 <= number_of_heights < 2:
+    if 0 <= number_of_heights <= 2:
         loss = (first_fold_energy(thickness, b_1, b_2, flow_stress)
                 * (number_of_heights / 2))
         energy_losses += loss
 
-    elif 2 <= number_of_heights < 3:
+    elif 2 < number_of_heights <= 3:
         loss = (first_fold_energy(thickness, b_1, b_2, flow_stress)
                 + pre_rupture_energy(thickness, b_1, b_2, flow_stress)
                 * (number_of_heights - 2))
         energy_losses += loss
+
+    elif number_of_heights > 3:
+        loss = (first_fold_energy(thickness, b_1, b_2, flow_stress)
+                + pre_rupture_energy(thickness, b_1, b_2, flow_stress)
+                + concertina_energy(thickness, b_1, b_2, flow_stress,
+                                    deflection, fold_height))
+        energy_losses += loss
+
+    elif number_of_heights < 0:
+        raise Exception("Number of heights (H) cannot be negative.")
+
+    return energy_losses
+
+
 
 
 
