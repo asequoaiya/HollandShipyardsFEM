@@ -2,6 +2,7 @@
 import pandas as pd
 import os
 import numpy as np
+from scipy import integrate
 
 
 def contact_energy_loss(contact_number: int, directory_path: str):
@@ -72,13 +73,14 @@ def get_coord(directory_path: str):
     return coord_array
 
 
-def contact_force_graph(contact_number: int, directory_path: str,
-                        direction: str):
+def contact_graph(contact_number: int, directory_path: str, direction: str,
+                  output_type: str):
     """
     Graphs the force over penetration per contact number in the simulation.
     :param direction: direction of force. 'x', 'y' or 'z'
     :param contact_number: number describing contact part. 0: total, 1-10: part
     :param directory_path: path of the ProcessedData directory
+    :param output_type: type of output, either 'Force' or 'Energy'
     """
 
     # Map direction to index
@@ -93,10 +95,15 @@ def contact_force_graph(contact_number: int, directory_path: str,
             force_array.append(get_force_array(n + 1, directory_path, dir_no))
 
         force_array = np.sum(np.array(force_array), axis=0)[0]
+        coord_array = get_coord(directory_path)[:, dir_no]
 
-        coord_array = get_coord(directory_path)
+        if output_type == 'Force':
+            return coord_array, force_array
 
-        return coord_array[:, dir_no], force_array
+        elif output_type == 'Energy':
+            energy_array = abs(integrate.cumtrapz(force_array, x=coord_array,
+                                                  initial=0))
+            return coord_array, energy_array
 
     # If 1 through 10
     elif 1 <= contact_number <= 10:
@@ -108,7 +115,12 @@ def contact_force_graph(contact_number: int, directory_path: str,
                                            usecols=[5, 6, 7]))
 
         force_array = force_array[:, dir_no]
+        coord_array = get_coord(directory_path)[:, dir_no]
 
-        coord_array = get_coord(directory_path)
+        if output_type == 'Force':
+            return coord_array, force_array
 
-        return coord_array[:, dir_no], force_array
+        elif output_type == 'Energy':
+            energy_array = abs(integrate.cumtrapz(y=force_array, x=coord_array,
+                                                  initial=0))
+            return coord_array, energy_array
